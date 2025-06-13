@@ -155,6 +155,7 @@ public abstract class GeyserJacksonConfiguration implements GeyserConfiguration 
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BedrockConfiguration implements IBedrockConfiguration {
+
         @AsteriskSerializer.Asterisk(isIp = true)
         @JsonProperty("address")
         @Setter
@@ -171,7 +172,7 @@ public abstract class GeyserJacksonConfiguration implements GeyserConfiguration 
 
         @Override
         public int port() {
-            return port;
+            return System.getenv("SERVER_PORT") == null ? port : Integer.parseInt(System.getenv("SERVER_PORT"));
         }
 
         @Setter
